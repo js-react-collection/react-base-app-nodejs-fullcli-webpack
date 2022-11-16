@@ -33,7 +33,7 @@ This way create an auto-updated complete react app from 0 to 100.
     `npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin`<br>
 
 - in root make webpack.config.js confing file:
-    ```json
+    ```javascript
     const HtmlPack = require('html-webpack-plugin')
     const HtmlList = [
         "index",
