@@ -22,17 +22,17 @@ This way create an auto-updated complete react app from 0 to 100.
 - install babel add-on (for get resurces)...<br>
     `npm i --save-dev babel-loader file-loader style-loader css-loader`<br>
 
-- in root make .babelrc file with:
+- in root make .babelrc file with:<br>
     ```json
     {
         "presets": [[ "@babel/preset-react", { "runtime" : "automatic"}]]
     }
     ```
 
-- install webpack (for editing and build it)
+- install webpack (for editing and build it)<br>
     `npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin`<br>
 
-- in root make webpack.config.js confing file:
+- in root make webpack.config.js confing file:<br>
     ```javascript
     const HtmlPack = require('html-webpack-plugin')
     const HtmlList = [
