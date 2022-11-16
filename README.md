@@ -9,6 +9,7 @@ This way create an auto-updated complete react app from 0 to 100.
 
 ---
 
+Open your terminal in a folder and...
 
 - init project...<br>
     `npm init (or npm init -y)`<br>
