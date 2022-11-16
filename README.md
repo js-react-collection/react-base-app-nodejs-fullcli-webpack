@@ -139,6 +139,6 @@ This way create an auto-updated complete react app from 0 to 100.
             <h1>HELLO FROM REACT!</h1>
         </React.StrictMode>
     )
-    ```
-
+    ```<br>
+<br>
 - `npm run build` for make "public" folder and optimized app (ready to online server use)
