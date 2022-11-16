@@ -23,7 +23,7 @@ This way create an auto-updated complete react app from 0 to 100.
     `npm i --save-dev babel-loader file-loader style-loader css-loader`<br>
 
 - in root make .babelrc file with:
-    ```
+    ```json
     {
         "presets": [[ "@babel/preset-react", { "runtime" : "automatic"}]]
     }
@@ -33,7 +33,7 @@ This way create an auto-updated complete react app from 0 to 100.
     `npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin`<br>
 
 - in root make webpack.config.js confing file:
-    ```
+    ```json
     const HtmlPack = require('html-webpack-plugin')
     const HtmlList = [
         "index",
@@ -96,15 +96,8 @@ This way create an auto-updated complete react app from 0 to 100.
     1. install a server<br>
         `npm i --save-dev http-server`<br>
 
-    2. make a server dir: `mkdir public`<br>
-
-    3. make first ./public/index.html:<br>
-    `echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>REACT</title></head><body><div>SERVER RUN - REACT ERROR</div></body></html>' > public/index.html`
-
-	4. inside html put `<script type="module" src="./reactor/index.js"></script>` for your first load
-
-    5. open package.json and change `"scripts": {...},` with:<br>
-        ```
+    2. open package.json and change `"scripts": {...},` with:<br>
+        ```json
         "scripts": {
             "start": "start http://localhost:8080/ && npm run server",
             "server": "http-server -a localhost -p 8080 -c-1",
@@ -113,9 +106,10 @@ This way create an auto-updated complete react app from 0 to 100.
         }
         ```
 
-    6. test server:<br>
-        with: `npm run serve` for edit in src<br>
-        with: `npm run start` for test build in public<br><br>
+    3. test server:<br>
+	_nb: for view result in server you need to compile app with last step_<br>
+        with: `npm run start` for test build in public<br>
+        with: `npm run serve` for edit in src<br><br>
 
 
   - if you use express:<br><br>
