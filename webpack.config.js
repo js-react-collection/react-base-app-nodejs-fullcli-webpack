@@ -59,10 +59,10 @@ module.exports = {
         minimize: false,
         // innerGraph: false,              // do not print analysis for unused exports
         // providedExports: true,          // try to undestand exports type automatically (true generete optmized direct exporting)
-        usedExports: true,              //
+        // usedExports: true,              //
         // removeAvailableModules: true,   // detect and remove modules already included
         // realContentHash: true,          // adds an additional hash compilation pass for secure paths
-        // sideEffects: false,             // detect and not load the sub libs of module  (https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md)
+        sideEffects: false,             // detect and not load the sub libs of module  (https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md)
         
         // mangleExports: true,
         // runtimeChunk: false,             // true = automatic nesting chunks progess, 'multiple', 'single' = one file for all chuncks
@@ -71,8 +71,6 @@ module.exports = {
         // moduleIds: false,
 
         splitChunks: {
-            // minChunks: 1,
-            chunks: 'all',
             cacheGroups: {
                 commons: {
                     test: /node_modules+(\/|\\)/gi,
@@ -81,9 +79,11 @@ module.exports = {
                         console.log('///////////////// module: ',moduleFilePath )
                         return moduleFilePath
                     },
-                    filename: `[name].js`,
+                    
                 },
-            }
+            },
+            chunks: 'all',
+            filename: `[name].js`,
         },
 
     },
