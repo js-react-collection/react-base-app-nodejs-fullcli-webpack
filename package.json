@@ -1,25 +1,26 @@
 {
   "name": "react-base-app-nodejs-fullcli-2",
   "version": "1.0.0",
-  "description": "Under process test",
-  "main": "index.js",
+  "description": "by @bertz-tech and @ShapeGroup / Complete exemple of react base app based on nodejs, babel and webpack started via CLI approach for make a minimal asset",
+  "main": "README.md",
   "scripts": {
     "start": "start http://localhost:8080/ && npm run server",
     "server": "http-server -a localhost -p 8080 -c-1",
     "serve": "webpack serve --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "build:analyze": "npm run build -- --env.addons=bundleanalyzer"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/js-react-collection/react-base-app-nodejs-fullcli-2.git"
+    "url": "git+https://github.com/js-react-collection/react-base-app-nodejs-fullcli-webpack.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/js-react-collection/react-base-app-nodejs-fullcli-2/issues"
+    "url": "https://github.com/js-react-collection/react-base-app-nodejs-fullcli-webpack"
   },
-  "homepage": "https://github.com/js-react-collection/react-base-app-nodejs-fullcli-2#readme",
+  "homepage": "https://github.com/js-react-collection/react-base-app-nodejs-fullcli-webpack#readme",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -27,11 +28,12 @@
   "devDependencies": {
     "@babel/preset-react": "^7.18.6",
     "babel-loader": "^9.1.0",
-    "file-loader": "^6.2.0",
-    "style-loader": "^3.3.1",
     "css-loader": "^6.7.2",
+    "exports-loader": "^4.0.0",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "http-server": "^14.1.1",
+    "style-loader": "^3.3.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"

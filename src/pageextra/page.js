@@ -1,6 +1,6 @@
 
 //:
-//: Main of react app project
+//: a second react app
 //:
 
 // get react
@@ -13,6 +13,7 @@ const root = ReactDOM.createRoot(document.getElementsByTagName('div')[0])
 //render app
 root.render(
 	<div>
-		<h1>HELLO FROM REACT 2...</h1>
+		<h1>HELLO FROM REACT...</h1>
+		<Test />
 	</div>
 )
