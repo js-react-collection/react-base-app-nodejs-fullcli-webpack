@@ -62,19 +62,17 @@ module.exports = {
         // moduleIds: false,
         splitChunks: {
             // minChunks: 1,
-            // chunks: 'all',
+            chunks: 'all',
             cacheGroups: {
                 commons: {
                     test: /[\\/]node_modules[\\/]/,
                     name: (module, chunks, cacheGroupKey) => {
                         let moduleResolve = String(module.identifier().replace(/\//gi,'\\').replace(/\.[^/.]+$/, "")),
                             moduleFileName = moduleResolve.split('\\').reduceRight((item) => item)
-                        // const allChunksNames = chunks.map((item) => item.name).join('~')
-                        console.log( moduleFileName )
-                        return 'modules/'+moduleFileName
-                        // return `${cacheGroupKey}/${allChunksNames}/${moduleFileName}`;
+                        console.log('/////////////////',moduleFileName )
+                        return moduleFileName
                     },
-                    // filename: 'modules/[name].js',
+                    filename: 'modules/[name].js',
 
                     // chunks: 'all',
                 },
