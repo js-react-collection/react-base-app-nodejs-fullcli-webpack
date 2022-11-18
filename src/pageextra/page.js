@@ -13,7 +13,6 @@ const root = ReactDOM.createRoot(document.getElementsByTagName('div')[0])
 //render app
 root.render(
 	<div>
-		<h1>HELLO FROM REACT...</h1>
-		<Test />
+		<h1>HELLO FROM SECOND SUB REACT...</h1>
 	</div>
 )

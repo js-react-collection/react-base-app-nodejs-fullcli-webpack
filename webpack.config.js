@@ -26,13 +26,22 @@ module.exports = {
     output: {
         clean: true,
         path: __dirname+'/public/',
-        // chunkFilename: '[id].js',
-        chunkFilename: function (pathData) {
-            console.log("pathData: :::::",pathData.chunk.name)
-            // return pathData.chunk.name === 'main' ? '[name].js' : '[name]/[name].js';
-        },
-        chunkFormat: 'commonjs',
-        // filename: '[name].bundle.js',
+        filename: '[name].bundle.js',
+        
+        // experimental output way:
+        // chunkFormat: 'array-push',
+        // filename: pathData => {
+        //     console.log('=======>',pathData)
+        //     let name = pathData.chunk.name;
+        //     if (!name) {
+        //         name = pathData.chunk.id;
+        //         if (name.includes('vendors-')) {
+        //             name = 'vendors';
+        //         }
+        //     }
+        //     return `${name}.js`;
+        // }
+
     },
     devServer: {
         static: __dirname+'/src',
@@ -50,53 +59,32 @@ module.exports = {
         minimize: false,
         // innerGraph: false,              // do not print analysis for unused exports
         // providedExports: true,          // try to undestand exports type automatically (true generete optmized direct exporting)
-        // usedExports: true,              //
+        usedExports: true,              //
         // removeAvailableModules: true,   // detect and remove modules already included
         // realContentHash: true,          // adds an additional hash compilation pass for secure paths
         // sideEffects: false,             // detect and not load the sub libs of module  (https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md)
         
-        mangleExports: true,
+        // mangleExports: true,
         // runtimeChunk: false,             // true = automatic nesting chunks progess, 'multiple', 'single' = one file for all chuncks
             
         // chunkIds: 'named',
         // moduleIds: false,
+
         splitChunks: {
             // minChunks: 1,
             chunks: 'all',
             cacheGroups: {
                 commons: {
-                    test: /[\\/]node_modules[\\/]/,
+                    test: /node_modules+(\/|\\)/gi,
                     name: (module, chunks, cacheGroupKey) => {
-                        let moduleResolve = String(module.identifier().replace(/\//gi,'\\').replace(/\.[^/.]+$/, "")),
-                            moduleFileName = moduleResolve.split('\\').reduceRight((item) => item)
-                        console.log('/////////////////',moduleFileName )
-                        return moduleFileName
+                        let moduleFilePath = cacheGroupKey+'/'+module.identifier().replace(/\//gi,'\\').replace(/\.[^/.]+$/, "").split('\\').reduceRight((item) => item)
+                        console.log('///////////////// module: ',moduleFilePath )
+                        return moduleFilePath
                     },
-                    filename: 'modules/[name].js',
-
-                    // chunks: 'all',
+                    filename: `[name].js`,
                 },
-            },
+            }
         },
-
-        // cacheGroups: {
-        //     commons: {
-        //       test: /[\\/]node_modules[\\/]/,
-        //       // cacheGroupKey here is `commons` as the key of the cacheGroup
-        //       name(module, chunks, cacheGroupKey) {
-        //         let moduleFileName = module.identifier().split('/').reduceRight((item) => item),
-        //             allChunksNames = chunks.map((item) => item.name).join('~')
-        //         return `${cacheGroupKey}/${allChunksNames}/${moduleFileName}`;
-        //       },
-        //     },
-        //     chunks: 'all',
-        // }
-        // cacheGroups: {
-        //     default: false,
-        //     // defaultVendors: {
-        //     //     filename: 'vendors/[name].js',
-        //     // },
-        // },
 
     },
     module: {
