@@ -258,4 +258,6 @@ Open your terminal in a folder and...
     )
     ```
 <br><br>
-- `npm run build` for make "public" folder and optimized app (ready to online server use)
+- `npm run build` for make "public" folder and optimized app (ready to online server use) 
+- <b>Note 01:</b> This is a prototype under costruction but we suggest to study the project pages inside `./src`, exand make new templates... exemple `template.html` connected via `template: 'src/template.html'` into `webpack.config`. You can see how we make multi-root and management of different type of file.
+- <b>Note 02:</b> Currently the folder "assets" and "components" is the standard folder for put inside that elements. The functions inside webpack config see it and split the argouments into new specific folder of output finished server folder progect (currently, the "public" -you can change it-)
