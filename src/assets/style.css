@@ -1,3 +1,89 @@
-*{
-    color:cornflowerblue !important;
-}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: #03020a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 13px;
+    justify-content: center;
+  }
+  
+  body>div{
+    display: grid;
+    max-width: 450px;
+    min-height: 100vh;
+  }
+  
+  
+  .react-logo{
+    box-shadow: inset 0 0 50px 2px #03020a;
+    border-radius: 50%;
+  }
+
+  .react-logo{
+    max-width: 300px;
+    width: 50vw;
+    max-height: 300px;
+    height: 50vw;
+    background: url("logo.bkg.webp") center center no-repeat;
+    background-size: 100% auto;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .react-logo>div{
+    max-width: 120px;
+    width: 25vw;
+    animation: logo-spin 20s infinite linear;
+  }
+
+  .react-logo img{
+    transform: scale(1);
+    max-width: 100%;
+  }
+
+  .react-logo,
+  .react-logo * {
+    transition: all 1s ease-in-out;
+  }
+  
+  header:hover .react-logo {
+    background-size: 150% auto;
+  }
+  header:hover .react-logo img {
+    transform: scale(.85);
+  }
+
+  @keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  a {
+    padding: 10px;
+    color: #00c8ff;
+    text-decoration: none;
+  }
+  a:hover{
+    color: #61dafb;
+  }
+  
+  button {
+    background-color: #191c20;
+    color: white;
+    padding: 5px;
+    margin: 0 3px;
+    border: 0;
+    border-radius: 2px;
+  }
+  button:active{
+    background-color: #2b2f35;
+  }

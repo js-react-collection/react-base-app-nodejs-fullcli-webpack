@@ -2,98 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 897:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-
-
-var m = __webpack_require__(116);
-if (true) {
-  exports.createRoot = m.createRoot;
-  exports.hydrateRoot = m.hydrateRoot;
-} else { var i; }
-
-/***/ }),
-
-/***/ 116:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-
-function checkDCE() {
-  /* global __REACT_DEVTOOLS_GLOBAL_HOOK__ */
-  if (typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ === 'undefined' || typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE !== 'function') {
-    return;
-  }
-  if (false) {}
-  try {
-    // Verify that the code above has been dead code eliminated (DCE'd).
-    __REACT_DEVTOOLS_GLOBAL_HOOK__.checkDCE(checkDCE);
-  } catch (err) {
-    // DevTools shouldn't crash React, no matter what.
-    // We should still report in case we break this code.
-    console.error(err);
-  }
-}
-if (true) {
-  // DCE check should happen before ReactDOM bundle executes so that
-  // DevTools can report bad minification during injection.
-  checkDCE();
-  module.exports = __webpack_require__(748);
-} else {}
-
-/***/ }),
-
-/***/ 43:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-/**
- * @license React
- * react-jsx-runtime.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-var f = __webpack_require__(466),
-  k = Symbol.for("react.element"),
-  l = Symbol.for("react.fragment"),
-  m = Object.prototype.hasOwnProperty,
-  n = f.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactCurrentOwner,
-  p = {
-    key: !0,
-    ref: !0,
-    __self: !0,
-    __source: !0
-  };
-function q(c, a, g) {
-  var b,
-    d = {},
-    e = null,
-    h = null;
-  void 0 !== g && (e = "" + g);
-  void 0 !== a.key && (e = "" + a.key);
-  void 0 !== a.ref && (h = a.ref);
-  for (b in a) m.call(a, b) && !p.hasOwnProperty(b) && (d[b] = a[b]);
-  if (c && c.defaultProps) for (b in a = c.defaultProps, a) void 0 === d[b] && (d[b] = a[b]);
-  return {
-    $$typeof: k,
-    type: c,
-    key: e,
-    ref: h,
-    props: d,
-    _owner: n.current
-  };
-}
-exports.Fragment = l;
-exports.jsx = q;
-exports.jsxs = q;
-
-/***/ }),
-
 /***/ 751:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -461,279 +369,6 @@ if (true) {
 
 /***/ }),
 
-/***/ 823:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-
-
-if (true) {
-  module.exports = __webpack_require__(43);
-} else {}
-
-/***/ }),
-
-/***/ 794:
-/***/ ((__unused_webpack_module, exports) => {
-
-/**
- * @license React
- * scheduler.production.min.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-function f(a, b) {
-  var c = a.length;
-  a.push(b);
-  a: for (; 0 < c;) {
-    var d = c - 1 >>> 1,
-      e = a[d];
-    if (0 < g(e, b)) a[d] = b, a[c] = e, c = d;else break a;
-  }
-}
-function h(a) {
-  return 0 === a.length ? null : a[0];
-}
-function k(a) {
-  if (0 === a.length) return null;
-  var b = a[0],
-    c = a.pop();
-  if (c !== b) {
-    a[0] = c;
-    a: for (var d = 0, e = a.length, w = e >>> 1; d < w;) {
-      var m = 2 * (d + 1) - 1,
-        C = a[m],
-        n = m + 1,
-        x = a[n];
-      if (0 > g(C, c)) n < e && 0 > g(x, C) ? (a[d] = x, a[n] = c, d = n) : (a[d] = C, a[m] = c, d = m);else if (n < e && 0 > g(x, c)) a[d] = x, a[n] = c, d = n;else break a;
-    }
-  }
-  return b;
-}
-function g(a, b) {
-  var c = a.sortIndex - b.sortIndex;
-  return 0 !== c ? c : a.id - b.id;
-}
-if ("object" === typeof performance && "function" === typeof performance.now) {
-  var l = performance;
-  exports.unstable_now = function () {
-    return l.now();
-  };
-} else {
-  var p = Date,
-    q = p.now();
-  exports.unstable_now = function () {
-    return p.now() - q;
-  };
-}
-var r = [],
-  t = [],
-  u = 1,
-  v = null,
-  y = 3,
-  z = !1,
-  A = !1,
-  B = !1,
-  D = "function" === typeof setTimeout ? setTimeout : null,
-  E = "function" === typeof clearTimeout ? clearTimeout : null,
-  F = "undefined" !== typeof setImmediate ? setImmediate : null;
-"undefined" !== typeof navigator && void 0 !== navigator.scheduling && void 0 !== navigator.scheduling.isInputPending && navigator.scheduling.isInputPending.bind(navigator.scheduling);
-function G(a) {
-  for (var b = h(t); null !== b;) {
-    if (null === b.callback) k(t);else if (b.startTime <= a) k(t), b.sortIndex = b.expirationTime, f(r, b);else break;
-    b = h(t);
-  }
-}
-function H(a) {
-  B = !1;
-  G(a);
-  if (!A) if (null !== h(r)) A = !0, I(J);else {
-    var b = h(t);
-    null !== b && K(H, b.startTime - a);
-  }
-}
-function J(a, b) {
-  A = !1;
-  B && (B = !1, E(L), L = -1);
-  z = !0;
-  var c = y;
-  try {
-    G(b);
-    for (v = h(r); null !== v && (!(v.expirationTime > b) || a && !M());) {
-      var d = v.callback;
-      if ("function" === typeof d) {
-        v.callback = null;
-        y = v.priorityLevel;
-        var e = d(v.expirationTime <= b);
-        b = exports.unstable_now();
-        "function" === typeof e ? v.callback = e : v === h(r) && k(r);
-        G(b);
-      } else k(r);
-      v = h(r);
-    }
-    if (null !== v) var w = !0;else {
-      var m = h(t);
-      null !== m && K(H, m.startTime - b);
-      w = !1;
-    }
-    return w;
-  } finally {
-    v = null, y = c, z = !1;
-  }
-}
-var N = !1,
-  O = null,
-  L = -1,
-  P = 5,
-  Q = -1;
-function M() {
-  return exports.unstable_now() - Q < P ? !1 : !0;
-}
-function R() {
-  if (null !== O) {
-    var a = exports.unstable_now();
-    Q = a;
-    var b = !0;
-    try {
-      b = O(!0, a);
-    } finally {
-      b ? S() : (N = !1, O = null);
-    }
-  } else N = !1;
-}
-var S;
-if ("function" === typeof F) S = function () {
-  F(R);
-};else if ("undefined" !== typeof MessageChannel) {
-  var T = new MessageChannel(),
-    U = T.port2;
-  T.port1.onmessage = R;
-  S = function () {
-    U.postMessage(null);
-  };
-} else S = function () {
-  D(R, 0);
-};
-function I(a) {
-  O = a;
-  N || (N = !0, S());
-}
-function K(a, b) {
-  L = D(function () {
-    a(exports.unstable_now());
-  }, b);
-}
-exports.unstable_IdlePriority = 5;
-exports.unstable_ImmediatePriority = 1;
-exports.unstable_LowPriority = 4;
-exports.unstable_NormalPriority = 3;
-exports.unstable_Profiling = null;
-exports.unstable_UserBlockingPriority = 2;
-exports.unstable_cancelCallback = function (a) {
-  a.callback = null;
-};
-exports.unstable_continueExecution = function () {
-  A || z || (A = !0, I(J));
-};
-exports.unstable_forceFrameRate = function (a) {
-  0 > a || 125 < a ? console.error("forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported") : P = 0 < a ? Math.floor(1E3 / a) : 5;
-};
-exports.unstable_getCurrentPriorityLevel = function () {
-  return y;
-};
-exports.unstable_getFirstCallbackNode = function () {
-  return h(r);
-};
-exports.unstable_next = function (a) {
-  switch (y) {
-    case 1:
-    case 2:
-    case 3:
-      var b = 3;
-      break;
-    default:
-      b = y;
-  }
-  var c = y;
-  y = b;
-  try {
-    return a();
-  } finally {
-    y = c;
-  }
-};
-exports.unstable_pauseExecution = function () {};
-exports.unstable_requestPaint = function () {};
-exports.unstable_runWithPriority = function (a, b) {
-  switch (a) {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-      break;
-    default:
-      a = 3;
-  }
-  var c = y;
-  y = a;
-  try {
-    return b();
-  } finally {
-    y = c;
-  }
-};
-exports.unstable_scheduleCallback = function (a, b, c) {
-  var d = exports.unstable_now();
-  "object" === typeof c && null !== c ? (c = c.delay, c = "number" === typeof c && 0 < c ? d + c : d) : c = d;
-  switch (a) {
-    case 1:
-      var e = -1;
-      break;
-    case 2:
-      e = 250;
-      break;
-    case 5:
-      e = 1073741823;
-      break;
-    case 4:
-      e = 1E4;
-      break;
-    default:
-      e = 5E3;
-  }
-  e = c + e;
-  a = {
-    id: u++,
-    callback: b,
-    priorityLevel: a,
-    startTime: c,
-    expirationTime: e,
-    sortIndex: -1
-  };
-  c > d ? (a.sortIndex = c, f(t, a), null === h(r) && a === h(t) && (B ? (E(L), L = -1) : B = !0, K(H, c - d))) : (a.sortIndex = e, f(r, a), A || z || (A = !0, I(J)));
-  return a;
-};
-exports.unstable_shouldYield = M;
-exports.unstable_wrapCallback = function (a) {
-  var b = y;
-  return function () {
-    var c = y;
-    y = b;
-    try {
-      return a.apply(this, arguments);
-    } finally {
-      y = c;
-    }
-  };
-};
-
-/***/ }),
-
 /***/ 767:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -745,7 +380,7 @@ if (true) {
 
 /***/ }),
 
-/***/ 415:
+/***/ 672:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -754,9 +389,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(897);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(823);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__);
-//:
-//: a second react app
-//:
+// //:
+// //: page of project
+// //:
+
+// // const Test02Contents = React.lazy(() => import('../components/test02Contents.js'))
+
+// //...
+// export default function Test02 () {
+
+// 	return (
+// 		<div>
+// 			<h1>HELLO FROM REACT 2...</h1>
+// 			{/* <Test02Contents /> */}
+// 		</div>
+// 	)
+
+// }
 
 // get react
 
@@ -764,13 +413,19 @@ __webpack_require__.r(__webpack_exports__);
 
 //make app root
 
-const root = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementsByTagName('div')[0]);
+
+const root02 = react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot(document.getElementsByTagName('div')[2]);
+// const Test02Contents = React.lazy(() => import('../components/test02.js'))
 
 //render app
-root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
-    children: "HELLO FROM SECOND SUB REACT..."
-  })
+root02.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h1", {
+    children: ["REACT APP 01: ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
+      children: "PAGE TWO"
+    })]
+  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+    children: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo."
+  })]
 }));
 
 /***/ })
@@ -885,7 +540,7 @@ root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"pageextra/page": 0
+/******/ 			"pages/test02": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -935,7 +590,7 @@ root.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["commons/react-dom.production.min"], () => (__webpack_require__(415)))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors/react-dom/react-dom.production.min","vendors/scheduler/scheduler.production.min","vendors/react-dom/index","vendors/react/react-jsx-runtime.production.min","vendors/react-dom/client","vendors/react/jsx-runtime"], () => (__webpack_require__(672)))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

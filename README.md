@@ -35,57 +35,173 @@ Open your terminal in a folder and...
 
 - in root make webpack.config.js confing file:<br>
     ```javascript
-    const HtmlPack = require('html-webpack-plugin')
-    const HtmlList = [
+    const htmlPack = require('html-webpack-plugin')
+
+    const htmlPagesList = [
         "index",
-        "test/secondpage"
+        "pages/test01",
+        "pages/test02"
     ]
 
     module.exports = {
 
-        //https://stackoverflow.com/questions/70916332/webpack-bundle-files-for-multiple-pages
-        // entry: { main: [ "./src/index.js", ], test: [ "./src/test/secondpage.js", ], },
-
-        entry: HtmlList.reduce( (config, page) => {
-            config[page] = `./src/${page}.js`;
+        entry: htmlPagesList.reduce( (config, page) => {
+            config[page] = `./src/${page}.js`
             return config;
         },{}),
 
         output: {
-            path: __dirname+'/public/reactor',
-            filename: '[name].bundle.js',
-            clean: true
+
+            clean: true,
+            path: __dirname+'/public/',
+            filename: asset => {
+                return asset.chunk.name+'.bundle.js'
+            },            
+
         },
+
         devServer: {
             static: __dirname+'/src',
             port: 8080,
             open: true,
             hot: true
         },
+
+        cache: false,
+        
+        optimization: {
+
+            minimize: true,                 // compress files
+            innerGraph: false,              // do not print analysis for unused exports
+            mangleExports:true,             // false: not change name of export modules (true: small name or id)
+            mangleWasmImports: true,        // true: shorter strings. It merge module and export names
+            flagIncludedChunks: true,       // mark blocks that are subsets of other blocks. so they don't have to be loaded when already included
+            portableRecords: false,         // generate records with relative paths to move the context folder.
+            providedExports: false,         // try to undestand exports type automatically (true generete optmized direct exporting)
+            usedExports: false,             // (this voice is better in "splitChunks" obj)
+            removeAvailableModules: true,   // detect and remove modules already included
+            realContentHash: true,          // adds an additional hash compilation pass for secure paths
+            sideEffects: false,             // detect and not load the sub libs of module  (https://github.com/webpack/webpack/blob/main/examples/side-effects/README.md)
+            concatenateModules: false,      // try to create one file for mixed modules
+            runtimeChunk: false,            // true = automatic nesting chunks progess, 'multiple', 'single' = one file for all chuncks
+            chunkIds: 'named',              // use explicit name in files analisys (chunks)
+
+            splitChunks: {
+
+                chunks: 'all',
+                cacheGroups: {
+                    default: false,
+                    defaultVendors: {
+
+                        enforce: true,
+                        reuseExistingChunk: true,
+                        test: /node_modules+(\/|\\)/gi,
+
+                        name: (chunk) => {
+
+                            let rootfolder = 'vendors/'+chunk.resource.split(/node_modules+(\\|\/)/i).pop("").split(/(\\|\/)/i)[0],
+                                moduleName = rootfolder+'/'+chunk.resource.replace(/\//gi,'\\').replace(/\.[^/.]+$/, "").split('\\').reduceRight((item) => item)
+
+                            return moduleName
+
+                        },
+
+                        filename: (asset) => { 
+                            console.log(':::: module export:',asset.chunk.name);
+                            return asset.chunk.name+".js"
+                        },
+
+                    },
+                    components: {
+
+                        enforce: true,
+                        reuseExistingChunk: true,
+                        test: /components+(\/|\\)/gi,
+                        name: (chunk) => {
+
+                            if( /components(\\|\/)/gi.test(chunk.identifier()) ){
+                                let componentPosition = 'components/'+chunk.identifier().replace(/\//gi,'\\').split(/components+(\\|\/)/i).pop("").split(/(\\|\/)/i)[0].replace(/(_js|\.js)/,'')
+                                console.log(":::: components export:",componentPosition)
+                                return componentPosition
+                            }
+
+                        },
+
+                    }
+
+                },
+
+            },
+
+        },
         module: {
-            rules: [ {
-                test: /\.js$/i,
-                exclude: /node_modules/,
-                use: [ 'babel-loader' ]
-            }, {
-                test: /\.css$/i,
-                exclude: /node_modules/,
-                use: [ 'style-loader', 'css-loader' ]
-            }, {
-                test: /\.(jpe?g|png|gif|webp|svg|ico|zip|json)$/i,
-                exclude: /node_modules/,
-                loader: 'file-loader',
-                options: {
-                    name: '[path][name].[ext]'
-                }
-            } ]
+
+            rules: [
+
+                {
+                    exclude: /(\/node_modules|\/\.bkp(s))/i,
+                    test: /\.(js|jsx)$/i,
+                    loader: 'babel-loader'
+                },
+                
+                {
+                    exclude: /(\/node_modules|\/\.bkp(s))/i,
+                    test: /\.css$/i,
+                    loader: 'style-loader',
+                    options: {
+                        esModule: false,
+                    }
+                },
+                
+                {
+                    exclude: /(\/node_modules|\/\.bkp(s))/i,
+                    test: /\.css$/i,
+                    loader: 'css-loader',
+                    options: {
+                        url: true,
+                        esModule: false,
+                        sourceMap: false,
+                        modules: false,
+                    },
+                },
+
+                {
+                    exclude: /(\/node_modules|\/\.bkp(s))/i,
+                    test: /\.(jp?g|png|gif|webp|svg|ico|zip|json|ttf|eot|woff|woff2)$/i,
+                    loader: 'file-loader',
+                    options: {
+                        modules: false,
+                        esModule: false,
+                        sourceMap: false,
+                        name: '[folder]/[name].[ext]?[contenthash]',
+                    }
+
+                },
+            ]
         },
         plugins : [].concat(
-            // https://dev.to/marcinwosinek/tutorial-for-building-multipage-website-with-webpack-4gdk
-            // https://github.com/jantimon/html-webpack-plugin
-            HtmlList.map( page => new HtmlPack({
+
+            htmlPagesList.map( page => new htmlPack({
+
                 filename: `${page}.html`,
-            })),
+                title: 'Custom template',
+                template: 'src/template.html',
+                minify:{
+                    collapseWhitespace: true,
+                    keepClosingSlash: true,
+                    removeComments: true,
+                    removeRedundantAttributes: true,
+                    removeScriptTypeAttributes: true,
+                    removeStyleLinkTypeAttributes: true,
+                    useShortDoctype: true,
+                    minifyURLs: false,
+                    sortAttributes: true,
+                    sortClassName: false,
+                    minifyJS: true,
+                    minifyCSS: true
+                }
+
+            }))
         )
     }
     ```
