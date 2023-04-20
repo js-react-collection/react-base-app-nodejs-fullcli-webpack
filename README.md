@@ -1,6 +1,6 @@
 # react-base-app-nodejs-fullcli-{webpack}
 
-<b>[under ooptimization] [working fine]</b>
+<b>[under optimization] [working fine]</b>
 
 A purist style approach to make a react app from stretch (without creacte-react-app) based on webpack.
 This way create an auto-updated complete react app from 0 to 100.
