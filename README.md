@@ -11,10 +11,10 @@ This way create an auto-updated complete react app from 0 to 100.
 
 Open your terminal in a folder and...
 
-- init project...<br>
+- init a nodejs project...<br>
     `npm init (or npm init -y)`<br>
 
-- install react...<br>
+- install react (this version is not [ssr](https://www.google.com/search?q=ssr+react&oq=ssr+react))...<br>
     `npm i --save react react-dom`<br>
 
 - install babel (for jsx and compiling)...<br>
