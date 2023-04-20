@@ -31,7 +31,7 @@ Open your terminal in a folder and...
     ```
 
 - install webpack (for editing and build it)<br>
-    `npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin`<br>
+    `npm i --save-dev webpack webpack-cli html-webpack-plugin`<br>
 
 - in root make webpack.config.js confing file:<br>
     ```javascript
@@ -95,7 +95,7 @@ Open your terminal in a folder and...
   - if not have express:<br><br>
 
     1. install a server<br>
-        `npm i --save-dev http-server`<br>
+        `npm i --save-dev http-server` and/or `npm i --save-dev webpack-dev-server`<br>
 
     2. open package.json and change `"scripts": {...},` with:<br>
         ```json
