@@ -23,13 +23,13 @@ Open your terminal in a folder and...
 - install babel add-on (for get resurces)...<br>
     `npm i --save-dev babel-loader file-loader style-loader css-loader`<br>
 
-- in root make .babelrc.json file with:<br>
+- in root make .babelrc file with:<br>
     ```json
     {
         "presets": [[ "@babel/preset-react", { "runtime" : "automatic"}]]
     }
     ```
-    or global profiling with babel.config.json<br>
+    or global profiling with babel.config.json (not raccomended)<br>
     ```json
     {
         "presets": ["@babel/preset-react"],
@@ -38,6 +38,12 @@ Open your terminal in a folder and...
                 "presets": [["@babel/preset-react", { "development": true }]]
         }
     }
+    ```
+    <i>nodejs best and simple way. Insert into package.json:</i><br>
+    ```json
+    "babel":{
+        "presets": [ [ "@babel/preset-react", { "runtime" : "automatic"}] ]
+    },
     ```
 
 - install webpack (for editing and build it)<br>
