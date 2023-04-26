@@ -23,10 +23,20 @@ Open your terminal in a folder and...
 - install babel add-on (for get resurces)...<br>
     `npm i --save-dev babel-loader file-loader style-loader css-loader`<br>
 
-- in root make .babelrc file with:<br>
+- in root make .babelrc.json file with:<br>
     ```json
     {
         "presets": [[ "@babel/preset-react", { "runtime" : "automatic"}]]
+    }
+    ```
+    or global profiling with babel.config.json<br>
+    ```json
+    {
+        "presets": ["@babel/preset-react"],
+        "env": {
+            "development": {
+                "presets": [["@babel/preset-react", { "development": true }]]
+        }
     }
     ```
 
